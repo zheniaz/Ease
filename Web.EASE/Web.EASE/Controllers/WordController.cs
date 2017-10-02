@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Web.EASE.Models;
 using Web.EASE.Services;
 
 namespace Web.EASE.Controllers
@@ -13,7 +14,7 @@ namespace Web.EASE.Controllers
         private QueryClass _quaryClass = new QueryClass();
 
         // GET api/values
-        public List<IGrouping<char, string>> Get(string from, string to)
+        public List<WordSetModel> Get(string from, string to)
         {
             return _quaryClass.GetWordsByQuery(from, to);
         }
