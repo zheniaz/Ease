@@ -1,0 +1,53 @@
+﻿<div id="queryBlock">
+    <table class="table-striped">
+        <tr>
+            <td><input type="text" id="from" placeholder="from" /></td>
+            <td><input type="text" id="to" placeholder="to" /></td>
+            <td><button id="sendQuery">send query</button></td>
+        </tr>
+
+
+    </table>
+</div>
+
+<div id="tableBlock">
+
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sendQuery").click(function (event) {
+                debugger;
+                GetWordSet();
+            })
+        })
+
+        //Getting word set by ajax query
+        function GetWordSet() {
+            debugger;
+            var from = $('#from').val();
+            var to = $('#to').val();
+            debugger;
+            $.ajax({
+                url: '/api/word/' + from +'/' + to,
+                type: 'GET',
+                datatype: 'json',
+                success: function (data) {
+                    WriteResponse(data);
+                },
+                error: function () {
+                    alert("You've entered uncorect query");
+                    console.log("You've entered uncorect query");
+                }
+            });
+        }
+
+        function WriteResponse(wordSet) {
+            var strResult = "";
+            console.log("The word set has loaded successfully");
+            $("#tableBlock").html(strResult);
+        }
+    </script>
+}
