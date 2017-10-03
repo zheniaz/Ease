@@ -10,7 +10,7 @@
     </table>
 </div>
 
-<div id="tableBlock">
+<div id="tableBlock" style="font-size: 10px">
 
 </div>
 
@@ -19,17 +19,14 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#sendQuery").click(function (event) {
-                debugger;
                 GetWordSet();
             })
         })
 
         //Getting word set by ajax query
         function GetWordSet() {
-            debugger;
             var from = $('#from').val();
             var to = $('#to').val();
-            debugger;
             $.ajax({
                 url: '/api/word/' + from +'/' + to,
                 type: 'GET',
@@ -44,9 +41,21 @@
             });
         }
 
-        function WriteResponse(wordSet) {
-            var strResult = "";
-            console.log("The word set has loaded successfully");
+        function WriteResponse(WordSetModels) {
+            debugger;
+            var strResult = '"<table class="table table-striped wordSetsTableClass"><th>Words</th>"';
+            $.each(WordSetModels, function (index, WordSetModel) {
+                strResult += "<tr><td>";
+
+                var itemWordList = WordSetModel.WordList;
+
+                $.each(itemWordList, function (wordIndex, word) {
+                    strResult += word + "  ";
+                });
+
+                strResult += "</td></tr>";
+            });
+            strResult += "</table>";
             $("#tableBlock").html(strResult);
         }
     </script>
