@@ -4,11 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Web.EASE.Models;
 using Web.EASE.Services;
 
 namespace Web.EASE.Controllers
 {
+
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class WordController : ApiController
     {
         private QueryClass _quaryClass = new QueryClass();
